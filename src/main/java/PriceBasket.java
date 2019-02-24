@@ -21,7 +21,13 @@ public class PriceBasket {
     }
 
     public static void main(String[] args) {
-        List<String> itemsInBasket = checkInputAndRemovePriceBasket(Arrays.asList(args));
+        List<String> itemsInBasket;
+        try {
+            itemsInBasket = checkInputAndRemovePriceBasket(Arrays.asList(args));
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return;
+        }
 
         countItems(itemsInBasket);
 
