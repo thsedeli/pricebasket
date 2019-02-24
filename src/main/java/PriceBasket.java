@@ -83,7 +83,7 @@ public class PriceBasket {
         BigDecimal subTotal = new BigDecimal(0.0);
 
         for (Map.Entry<String, Integer> entry : itemCount.entrySet()) {
-            subTotal = subTotal.add(getPriceForItem(entry.getKey())).multiply(new BigDecimal(entry.getValue()));
+            subTotal = subTotal.add(getPriceForItem(entry.getKey()).multiply(new BigDecimal(entry.getValue())));
         }
 
         total = subTotal;
