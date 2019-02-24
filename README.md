@@ -2,6 +2,11 @@
 
 Steps to run the application
 
+- You  can download the file PriceBasket.class from the repository's root folder and run it through terminal using the following command:
+  java PriceBasket PriceBasket Milk Apple Soup
+  see more examples below 
+
+- Alternatively :
 1. Download and extract the repository
 2. Create New Project from existing resources in Intellij IDEA and select the downloaded project
 3. Select Import Project from external model, select Maven and click Next
