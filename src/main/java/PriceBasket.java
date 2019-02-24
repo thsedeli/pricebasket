@@ -9,16 +9,21 @@ public class PriceBasket {
     private static final String MILK = "Milk";
     private static final String SOUP = "Soup";
     private static final BigDecimal APPLE_DISCOUNT = new BigDecimal(0.10);
+    private static final BigDecimal SOUP_PRICE = new BigDecimal(0.65);
+    private static final BigDecimal BREAD_PRICE = new BigDecimal(0.80);
+    private static final BigDecimal MILK_PRICE = new BigDecimal(1.30);
+    private static final BigDecimal APPLE_PRICE = new BigDecimal(1.00);
+    private static final BigDecimal ZERO = new BigDecimal(0);
     private static BigDecimal total = new BigDecimal(0.0);
 
     private static final Map<String, BigDecimal> itemsToPrices = new HashMap<>();
     private static final Map<String, Integer> itemCount = new HashMap<>();
 
     static {
-        itemsToPrices.put(SOUP, new BigDecimal(0.65));
-        itemsToPrices.put(BREAD, new BigDecimal(0.80));
-        itemsToPrices.put(MILK, new BigDecimal(1.30));
-        itemsToPrices.put(APPLE, new BigDecimal(1.00));
+        itemsToPrices.put(SOUP, SOUP_PRICE);
+        itemsToPrices.put(BREAD, BREAD_PRICE);
+        itemsToPrices.put(MILK, MILK_PRICE);
+        itemsToPrices.put(APPLE, APPLE_PRICE);
     }
 
     public static void main(String[] args) {
@@ -81,7 +86,7 @@ public class PriceBasket {
      * Using the map of items and their counts generates the subtotal before any discounts
      */
     static BigDecimal generatePrice() {
-        BigDecimal subTotal = new BigDecimal(0.0);
+        BigDecimal subTotal = ZERO;
 
         for (Map.Entry<String, Integer> entry : itemCount.entrySet()) {
             subTotal = subTotal.add(getPriceForItem(entry.getKey()).multiply(new BigDecimal(entry.getValue())));
@@ -113,7 +118,7 @@ public class PriceBasket {
 
         //calculate soup discount
         if (itemCount.get(SOUP) > 1 && itemCount.get(BREAD) > 0) {
-            BigDecimal breadDiscount = new BigDecimal(0.0);
+            BigDecimal breadDiscount = ZERO;
             int soupCount = itemCount.get(SOUP);
             for (int i = 0; i < itemCount.get(BREAD); i++) {
                 if (soupCount > 1) {
@@ -121,7 +126,7 @@ public class PriceBasket {
                     soupCount -= 2;
                 }
             }
-            if (breadDiscount.compareTo(new BigDecimal(0.0)) > 0) {
+            if (breadDiscount.compareTo(ZERO) > 0) {
                 offersList.add("50% off of loaf of Bread if you buy 2 cans of Soup: -" + breadDiscount.setScale(2, RoundingMode.FLOOR));
                 total = total.subtract(breadDiscount);
             }
