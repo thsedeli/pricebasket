@@ -8,6 +8,7 @@ public class PriceBasket {
     private static final String BREAD = "Bread";
     private static final String MILK = "Milk";
     private static final String SOUP = "Soup";
+    private static final BigDecimal APPLE_DISCOUNT = new BigDecimal(0.10);
     private static BigDecimal total = new BigDecimal(0.0);
 
     private static final Map<String, BigDecimal> itemsToPrices = new HashMap<>();
@@ -105,7 +106,7 @@ public class PriceBasket {
 
         //calculate apple discount
         if (itemCount.get(APPLE) != 0) {
-            BigDecimal appleDiscount = new BigDecimal(0.10).multiply(new BigDecimal(itemCount.get(APPLE)));
+            BigDecimal appleDiscount = APPLE_DISCOUNT.multiply(new BigDecimal(itemCount.get(APPLE)));
             offersList.add("Apples 10% off: -" + appleDiscount.setScale(2, RoundingMode.FLOOR));
             total = total.subtract(appleDiscount);
         }
